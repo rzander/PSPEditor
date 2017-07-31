@@ -1,5 +1,5 @@
 # PSPEditor
-PowerShell Policy Editor
+a Windows Policy Editor that returns PowerShell scripts... 
 
 ## coming soon....
 First trial at: http://pspeditor.azurewebsites.net/
