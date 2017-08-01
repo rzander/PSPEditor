@@ -8,7 +8,7 @@ The current version is based on Win10 (1703) ADMX Files (English).
 First trial at: http://pspeditor.azurewebsites.net/
 
 ## Please report any Issues or missing .Admx Files
-This Tool is Beat as it's not fully tested, so be carefull if you use this Tools in production...
+This Tool is a BETA Version as it's not fully tested, so be carefull if you use this Tools in production...
 
 There is no support and warranty... use at your own risk !!!!
 
