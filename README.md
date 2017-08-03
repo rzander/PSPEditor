@@ -15,3 +15,4 @@ There is no support and warranty... use at your own risk !!!!
 ## Project-Status:
 * 31.Jul.2017 : 2'668 Policy Settings migrated (based on Win10 1703)
 * 1.Aug.2017 :  3'025 Policy Settings migrated (Win10 1703), Folder structure alligned with GPEdit
+* 3.Aug.2017 : Policy TreeView to use the full page height fixed; text-values in PowerShell fixed; Policies with special characters crash fixed;
