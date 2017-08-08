@@ -18,4 +18,4 @@ There is no support and warranty... use at your own risk !!!!
 * 3.Aug.2017 : Policy TreeView to use the full page height fixed; text-values in PowerShell fixed; Policies with special characters crash fixed;
 * 4.Aug.2017 : 5'3000 Policy Settings migrated (Win10 1703, Office 2016, Google, Adobe Reader 2017)
 * 5.Aug.2017 : 5'590 Policy Settings migrated (+ Google Chrome, FireFox)
-* 8.Aug.2017 : 5'983 Policy Settings ( + Citrix Receiver, Foxit Reder 7.3 )
+* 8.Aug.2017 : 5'983 Policy Settings ( + Citrix Receiver, Foxit Reader 7.3 )
