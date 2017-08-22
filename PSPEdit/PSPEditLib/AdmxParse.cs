@@ -221,7 +221,7 @@ namespace PSPEdit
 
                             element oElem = new element();
 
-                            switch (xElem.Name)
+                            switch (xElem.Name.ToLower())
                             {
                                 case "decimal":
                                     oElem = new decimalElement();
@@ -336,6 +336,90 @@ namespace PSPEdit
 
                             oRes.elements.Add(oElem);
                         }
+                    }
+
+                    if (xPol["enabledList"] != null)
+                    {
+                        EnableListElement oElem = new EnableListElement();
+
+                        oElem.ValueType = valueType.Enum;
+                        oElem.enabledValueList = new List<enabledList>();
+
+                        foreach (XmlNode xElem in xPol["enabledList"].SelectNodes("pd:item", ns))
+                        {
+                            try
+                            {
+                                enabledList oResList = new enabledList();
+                                
+                                if (xElem["value"].FirstChild.Name == "decimal")
+                                {
+                                    oResList.type = valueType.Decimal;
+                                    oResList.key = xElem.Attributes["key"].Value;
+                                    oResList.valueName = xElem.Attributes["valueName"].Value;
+                                    oResList.value = xElem["value"].FirstChild.Attributes["value"].Value;
+                                }
+                                if (xElem["value"].FirstChild.Name == "string")
+                                {
+                                    oResList.type = valueType.Text;
+                                    oResList.key = xElem.Attributes["key"].Value;
+                                    oResList.valueName = xElem.Attributes["valueName"].Value;
+                                    oResList.value = xElem["value"].FirstChild.Attributes["value"].Value;
+                                }
+
+                                oElem.enabledValueList.Add(oResList);
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine(ex.Message);
+                            }
+
+
+                        }
+
+
+                        oRes.elements.Add(oElem);
+                    }
+
+                    if (xPol["disabledList"] != null)
+                    {
+                        EnableListElement oElem = new EnableListElement();
+
+                        oElem.ValueType = valueType.Enum;
+                        oElem.disabledValueList = new List<enabledList>();
+
+                        foreach (XmlNode xElem in xPol["disabledList"].SelectNodes("pd:item", ns))
+                        {
+                            try
+                            {
+                                enabledList oResList = new enabledList();
+
+                                if (xElem["value"].FirstChild.Name == "decimal")
+                                {
+                                    oResList.type = valueType.Decimal;
+                                    oResList.key = xElem.Attributes["key"].Value;
+                                    oResList.valueName = xElem.Attributes["valueName"].Value;
+                                    oResList.value = xElem["value"].FirstChild.Attributes["value"].Value;
+                                }
+                                if (xElem["value"].FirstChild.Name == "string")
+                                {
+                                    oResList.type = valueType.Text;
+                                    oResList.key = xElem.Attributes["key"].Value;
+                                    oResList.valueName = xElem.Attributes["valueName"].Value;
+                                    oResList.value = xElem["value"].FirstChild.Attributes["value"].Value;
+                                }
+
+                                oElem.disabledValueList.Add(oResList);
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine(ex.Message);
+                            }
+
+
+                        }
+
+
+                        oRes.elements.Add(oElem);
                     }
 
                     policies.Add(oRes);
@@ -519,6 +603,8 @@ namespace PSPEdit
                     if (elements == null)
                         return sResult;
 
+                    sResult += "#region " + this.displayName +"\n\n";
+
                     if (this.state == policyState.NotConfigured)
                     {
                         foreach (var oElem in elements)
@@ -533,11 +619,30 @@ namespace PSPEdit
                             }
                             if (oElem.ValueType != valueType.List)
                             {
-                                sResult += "Remove-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -ea SilentlyContinue \n";
+                                if (!string.IsNullOrEmpty(oElem.ValueName))
+                                {
+                                    sResult += "Remove-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -ea SilentlyContinue \n";
+                                }
                             }
                             else
                             {
                                 sResult += "New-Item -Path '" + pskey + "' -force -ea SilentlyContinue \n";
+                            }
+                        }
+
+                        foreach (EnableListElement oElem in elements.Where(t => t.GetType() == typeof(EnableListElement)))
+                        {
+                            if (oElem.disabledValueList != null)
+                            {
+                                foreach (var odislis in oElem.disabledValueList)
+                                {
+                                    string sKey = "HKLM:\\";
+                                    if (this.policyType == classType.User)
+                                        sKey = "HKCU:\\";
+
+                                    sResult += "Remove-ItemProperty -Path '" + sKey + odislis.key + "' -Name '" + odislis.valueName + "' -ea SilentlyContinue \n";
+
+                                }
                             }
                         }
 
@@ -559,15 +664,19 @@ namespace PSPEdit
                                 else
                                     sKey = "HKCU:\\" + oElem.key;
                             }
-                            sResult = "#Create the key if missing \n";
+                            sResult += "#Create the key if missing \n";
                             sResult += "If((Test-Path '" + pskey + "') -eq $false ) { New-Item -Path '" + pskey + "' -force -ea SilentlyContinue } \n\n";
                             sResult += "#Disable the Policy \n";
 
                             if (((polEnableElement)oElem).disabledValue != null)
                                 sResult += "Set-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -Value " + ((polEnableElement)oElem).disabledValue as string + " -ea SilentlyContinue \n";
                             else
-                                sResult += "Remove-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -ea SilentlyContinue \n";
-
+                            {
+                                if (!string.IsNullOrEmpty(oElem.ValueName))
+                                {
+                                    sResult += "Remove-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -ea SilentlyContinue \n";
+                                }
+                            }
                         }
                         
 
@@ -576,7 +685,7 @@ namespace PSPEdit
                         {
                             if (Settings)
                             {
-                                sResult += "\n#Remove Settings \n";
+                                sResult += "#Disable Settings \n";
                                 Settings = false;
                             }
                             string sKey = this.pskey;
@@ -589,7 +698,10 @@ namespace PSPEdit
                             }
                             if (oElem.ValueType != valueType.List)
                             {
-                                sResult += "Remove-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -ea SilentlyContinue \n";
+                                if (!string.IsNullOrEmpty(oElem.ValueName))
+                                {
+                                    sResult += "Remove-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -ea SilentlyContinue \n";
+                                }
                             }
                             else
                             {
@@ -597,11 +709,30 @@ namespace PSPEdit
                             }
 
                         }
+
+                        foreach (EnableListElement oElem in elements.Where(t => t.GetType() == typeof(EnableListElement)))
+                        {
+                            if (oElem.disabledValueList != null)
+                            {
+                                foreach (var odislis in oElem.disabledValueList)
+                                {
+                                    string sKey = "HKLM:\\";
+                                    if (this.policyType == classType.User)
+                                        sKey = "HKCU:\\";
+                                    string sValue = odislis.value;
+
+                                    if (odislis.type == valueType.Text)
+                                        sValue = "'" + odislis.value + "'";
+
+                                    sResult += "Set-ItemProperty -Path '" + sKey + odislis.key + "' -Name '" + odislis.valueName + "' -Value " + sValue + " -ea SilentlyContinue \n";
+                                }
+                            }
+                        }
                     }
 
                     if (this.state == policyState.Enabled)
                     {
-                        sResult = "#Create the key if missing \n";
+                        sResult += "#Create the key if missing \n";
                         sResult += "If((Test-Path '" + pskey + "') -eq $false ) { New-Item -Path '" + pskey + "' -force -ea SilentlyContinue } \n";
 
                         foreach (var oElem in elements.Where(t => t.ValueType == valueType.PolicyEnable))
@@ -623,7 +754,7 @@ namespace PSPEdit
                         {
                             if (Settings)
                             {
-                                sResult += "\n#Settings \n";
+                                sResult += "\n#Enable Settings \n";
                                 Settings = false;
                             }
                             string sKey = this.pskey;
@@ -661,7 +792,27 @@ namespace PSPEdit
                                 sResult += "Set-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -Value " + oElem.value + " -ea SilentlyContinue \n";
                             }
                         }
+
+                        foreach (EnableListElement oElem in elements.Where(t => t.GetType() == typeof(EnableListElement)))
+                        {
+                            if (oElem.enabledValueList != null)
+                            {
+                                foreach (var oenlis in oElem.enabledValueList)
+                                {
+                                    string sKey = "HKLM:\\";
+                                    if (this.policyType == classType.User)
+                                        sKey = "HKCU:\\";
+                                    string sValue = oenlis.value;
+
+                                    if (oenlis.type == valueType.Text)
+                                        sValue = "'" + oenlis.value + "'";
+
+                                    sResult += "Set-ItemProperty -Path '" + sKey + oenlis.key + "' -Name '" + oenlis.valueName + "' -Value " + sValue + " -ea SilentlyContinue \n";
+                                }
+                            }
+                        }
                     }
+                    sResult += "\n#endregion";
                     return sResult;
                 }
             }
@@ -709,6 +860,12 @@ namespace PSPEdit
         {
             public object enabledValue { get; set; }
             public object disabledValue { get; set; }
+        }
+
+        public class EnableListElement : element
+        {
+            public List<enabledList> enabledValueList { get; set; }
+            public List<enabledList> disabledValueList { get; set; }
         }
 
         public enum classType { Machine, User }
@@ -793,6 +950,14 @@ namespace PSPEdit
             catch { }
 
             return sResult;
+        }
+
+        public class enabledList
+        {
+            public string key  { get; set; }
+            public string valueName { get; set; }
+            public valueType type { get; set; }
+            public string value { get; set; }
         }
 
     }
