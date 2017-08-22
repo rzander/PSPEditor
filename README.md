@@ -19,3 +19,4 @@ There is no support and warranty... use at your own risk !!!!
 * 4.Aug.2017 : 5'3000 Policy Settings migrated (Win10 1703, Office 2016, Google, Adobe Reader 2017)
 * 5.Aug.2017 : 5'590 Policy Settings migrated (+ Google Chrome, FireFox)
 * 8.Aug.2017 : 5'983 Policy Settings ( + Citrix Receiver, Foxit Reader 8.3 )
+* 22.Aug.2017: Implement 'enbleList' and 'disableList' Elements (e.g. for "Remote Desktop Services" )
