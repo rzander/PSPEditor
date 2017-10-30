@@ -255,7 +255,16 @@ namespace PSPEdit
                                             if (string.IsNullOrEmpty(sDisplayName))
                                                 sDisplayName = xElemItem.Attributes["displayName"].Value.Replace("$(string.", "").TrimEnd(')');
                                             if (xElemItem["value"].FirstChild.Name == "decimal")
-                                                ((enumElement)oElem).valueList.Add(sDisplayName, xElemItem["value"].FirstChild.Attributes["value"].Value);
+                                            {
+                                                if (xElemItem["value"].FirstChild.Attributes.Count > 0)
+                                                {
+                                                    ((enumElement)oElem).valueList.Add(sDisplayName, xElemItem["value"].FirstChild.Attributes["value"].Value);
+                                                }
+                                                else
+                                                {
+                                                    ((enumElement)oElem).valueList.Add(sDisplayName, xElemItem["value"].FirstChild.InnerText);
+                                                }
+                                            }
                                             if (xElemItem["value"].FirstChild.Name == "string")
                                                 ((enumElement)oElem).valueList.Add(sDisplayName, xElemItem["value"].FirstChild.InnerText);
                                             string sDefault = oRes.sPresentationdefaultValue(xElem.Attributes["id"].Value);
@@ -363,7 +372,14 @@ namespace PSPEdit
                                     oResList.type = valueType.Text;
                                     oResList.key = xElem.Attributes["key"].Value;
                                     oResList.valueName = xElem.Attributes["valueName"].Value;
-                                    oResList.value = xElem["value"].FirstChild.Attributes["value"].Value;
+                                    if (xElem["value"].FirstChild.Attributes.Count > 0)
+                                    {
+                                        oResList.value = xElem["value"].FirstChild.Attributes["value"].Value;
+                                    }
+                                    else
+                                    {
+                                        oResList.value = xElem["value"].FirstChild.InnerText;
+                                    }
                                 }
 
                                 oElem.enabledValueList.Add(oResList);
@@ -405,7 +421,14 @@ namespace PSPEdit
                                     oResList.type = valueType.Text;
                                     oResList.key = xElem.Attributes["key"].Value;
                                     oResList.valueName = xElem.Attributes["valueName"].Value;
-                                    oResList.value = xElem["value"].FirstChild.Attributes["value"].Value;
+                                    if (xElem["value"].FirstChild.Attributes.Count > 0)
+                                    {
+                                        oResList.value = xElem["value"].FirstChild.Attributes["value"].Value;
+                                    }
+                                    else
+                                    {
+                                        oResList.value = xElem["value"].FirstChild.InnerText;
+                                    }
                                 }
 
                                 oElem.disabledValueList.Add(oResList);
@@ -746,7 +769,14 @@ namespace PSPEdit
                                     sKey = "HKCU:\\" + oElem.key;
                             }
                             sResult += "\n#Enable the Policy\n";
-                            sResult += "Set-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -Value " + ((polEnableElement)oElem).enabledValue as string + " -ea SilentlyContinue \n";
+                            try
+                            {
+                                sResult += "Set-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -Value " + ((polEnableElement)oElem).enabledValue as string + " -ea SilentlyContinue \n";
+                            }
+                            catch
+                            {
+                                sResult += "Set-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -Value " + oElem.value ?? "" + " -ea SilentlyContinue \n";
+                            }
                         }
 
                         bool Settings = true;
