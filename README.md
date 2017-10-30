@@ -3,7 +3,7 @@ a Windows Policy Editor that returns PowerShell scripts...
 
 With PSPEditor you can configure your Policies like with GPEdit but as a result you get the PowerShell code.
 
-The current version is based on Win10 (1703) ADMX Files (English).
+The current version is based on Win10 (1709) ADMX Files (English).
 
 First trial at: http://pspeditor.azurewebsites.net/
 
