@@ -21,3 +21,4 @@ There is no support and warranty... use at your own risk !!!!
 * 8.Aug.2017 : 5'983 Policy Settings ( + Citrix Receiver, Foxit Reader 8.3 )
 * 22.Aug.2017: Implement 'enableList' and 'disableList' Elements (e.g. for "Remote Desktop Services" )
 * 30.Oct.2017 : uploaded policy settings from Win10 1709 and fix session state issue and type conversion exception;
+* 8.May.2018 : upload policy settings frm Win10 1803; Fix invalid PowerShell on empty boolean list values
