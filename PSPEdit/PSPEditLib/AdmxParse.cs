@@ -809,16 +809,31 @@ namespace PSPEdit
                                     sKey = "HKCU:\\" + oElem.key;
                             }
 
-                            if(oElem.ValueType == valueType.List)
+                            if (oElem.ValueType == valueType.List)
                             {
-                                foreach(var oIt in ((AdmxParse.listElement)oElem).valueList)
+                                foreach (var oIt in ((AdmxParse.listElement)oElem).valueList)
                                 {
                                     sResult += "Set-ItemProperty -Path '" + sKey + "' -Name '" + oIt.Key + "' -Value " + oIt.Value + " -ea SilentlyContinue \n";
                                 }
+                                continue;
                             }
 
                             if (oElem.ValueType != valueType.List)
                             {
+                                if (oElem.ValueType == valueType.Decimal)
+                                {
+                                    if(!string.IsNullOrEmpty(oElem.value))
+                                        sResult += "Set-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -Value " + oElem.value + " -ea SilentlyContinue \n";
+                                    continue;
+                                }
+
+                                if (oElem.ValueType == valueType.Boolean)
+                                {
+                                    if (!string.IsNullOrEmpty(oElem.value))
+                                        sResult += "Set-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -Value " + oElem.value + " -ea SilentlyContinue \n";
+                                    continue;
+                                }
+
                                 sResult += "Set-ItemProperty -Path '" + sKey + "' -Name '" + oElem.ValueName + "' -Value " + oElem.value + " -ea SilentlyContinue \n";
                             }
                         }
