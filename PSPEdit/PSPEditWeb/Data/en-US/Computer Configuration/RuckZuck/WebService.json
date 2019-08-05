@@ -1,0 +1,36 @@
+{
+    "$type": "PSPEdit.AdmxParse+policy, PSPEdit",
+    "state": 2,
+    "name": "WebService",
+    "policyType": 0,
+    "displayName": "WebService",
+    "explainText": "Change the address of the REST API. Use this option if you are using an internal RuckZuck-Proxy Server. All Requests wil be forwarded to the specified URL.",
+    "presentation": "",
+    "key": "Software\\Policies\\RuckZuck",
+    "pskey": "HKLM:\\Software\\Policies\\RuckZuck",
+    "parentCategory": {
+        "$type": "PSPEdit.AdmxParse+category, PSPEdit",
+        "parent": "RUCKZUCK",
+        "name": "RUCKZUCK",
+        "displayName": "RuckZuck",
+        "innerXML": null
+    },
+    "path": "RUCKZUCK",
+    "displaypath": "RuckZuck",
+    "innerXML": null,
+    "elements": {
+        "$type": "System.Collections.Generic.List`1[[PSPEdit.AdmxParse+element, PSPEdit]], mscorlib",
+        "$values": [
+            {
+                "$type": "PSPEdit.AdmxParse+textElement, PSPEdit",
+                "ValueName": "WebService",
+                "ValueType": 3,
+                "value": "https://rzproxy.azurewebsites.net",
+                "required": false,
+                "innerXML": null,
+                "key": "Software\\Policies\\RuckZuck"
+            }
+        ]
+    },
+    "PSCode": ""
+}

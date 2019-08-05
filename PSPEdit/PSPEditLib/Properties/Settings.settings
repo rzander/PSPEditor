@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PSPEditLib.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PSPEdit.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="DevicePathMapping" Type="System.String" Scope="Application">
@@ -10,6 +10,9 @@
     &lt;administrativeTemplates displayname="Administrative Templates" imageURL="~/Images/Folder_16.png"&gt;
         &lt;PolicyNode displayname="Google" name="Google:Cat_Google"&gt;&lt;/PolicyNode&gt;
         &lt;PolicyNode displayname="Adobe Reader 2017" name="Cat_Adobe_Reader_2017_31"&gt;&lt;/PolicyNode&gt;
+        &lt;PolicyNode displayname="Citrix" name="citrix:CITRIX_COMPONENTS"&gt;&lt;/PolicyNode&gt;
+        &lt;PolicyNode displayname="Foxit" name="FOXIT"&gt;&lt;/PolicyNode&gt;
+        &lt;PolicyNode displayname="Windows Components" name="windows:Software"&gt;&lt;/PolicyNode&gt;
         &lt;PolicyNode displayname="Windows Components" name="windows:WindowsComponents"&gt;
             &lt;PolicyNode displayname="Tablet PC" name="windows:TabletPC"&gt;&lt;/PolicyNode&gt;
             &lt;PolicyNode displayname="Server" name="backup:Backup\BackupServer"&gt;&lt;/PolicyNode&gt;
