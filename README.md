@@ -24,3 +24,4 @@ There is no support and warranty... use at your own risk !!!!
 * 8.May.2018 : upload policy settings from Win10 1803; Fix invalid PowerShell on empty boolean list values
 * 25.Dec.2018 : upload policy settings from Win10 1809
 * 5.Aug.2019 : upload policy settings from Win10 1903
+* 11.Mar.2020 : upload policy settings for Edge Chromium
