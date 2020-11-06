@@ -9,7 +9,7 @@
         <asp:TextBox class="form-control" ID="tbDescription" runat="server" TextMode="MultiLine" Height="30%"></asp:TextBox>
 
         <label for="user_title">Status</label>
-        <div class="form-control" style="height: 90px">
+        <div class="form-control" style="height: 95px">
             <asp:RadioButtonList ID="statusRadios" RepeatLayout="Flow" RepeatDirection="vertical" runat="server" OnSelectedIndexChanged="statusRadios_SelectedIndexChanged" AutoPostBack="True">
                 <asp:ListItem class="radio-inline" Value="1" Text="Enabled"></asp:ListItem>
                 <asp:ListItem class="radio-inline" Value="0" Text="Disabled"></asp:ListItem>
