@@ -86,7 +86,11 @@ namespace PSPEditWeb
 
         protected void tvADMXFiles_TreeNodeCollapsed(object sender, TreeNodeEventArgs e)
         {
-            tvADMXFiles.SelectedNode.ImageUrl = "~/Images/folder_closed.png";
+            try
+            {
+                tvADMXFiles.SelectedNode.ImageUrl = "~/Images/folder_closed.png";
+            }
+            catch { }
         }
     }
 }
