@@ -44,42 +44,53 @@ namespace PSPEditWeb
 
         protected void tvADMXFiles_TreeNodeExpanded(object sender, TreeNodeEventArgs e)
         {
-            if (e.Node.ChildNodes.Count == 0)
+            try
             {
-                if (!File.Exists(e.Node.Value))
+                if (e.Node.ChildNodes.Count == 0)
                 {
-                    try
+                    if (!File.Exists(e.Node.Value))
                     {
-                        LoadDir(e.Node.ChildNodes, new DirectoryInfo(e.Node.Value));
-                    }
-                    catch(Exception ex)
-                    {
-                        Debug.WriteLine(ex.Message);
+                        try
+                        {
+                            LoadDir(e.Node.ChildNodes, new DirectoryInfo(e.Node.Value));
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine(ex.Message);
+                        }
                     }
                 }
-            }
 
-            e.Node.ImageUrl = "~/Images/folder.png";
+                e.Node.ImageUrl = "~/Images/folder.png";
+            }
+            catch { }
         }
 
         protected void tvADMXFiles_SelectedNodeChanged(object sender, EventArgs e)
         {
-            if (File.Exists(tvADMXFiles.SelectedNode.Value))
+            try
             {
-                admxViewer.LoadPolicy(tvADMXFiles.SelectedNode.Value);
+                if (File.Exists(tvADMXFiles.SelectedNode.Value))
+                {
+                    admxViewer.LoadPolicy(tvADMXFiles.SelectedNode.Value);
 
+                }
+                else
+                {
+                    tvADMXFiles.SelectedNode.Expand();
+                    //tvADMXFiles.SelectedNode.ImageUrl = "~/Images/folder.png";
+                }
             }
-            else
-            {
-                tvADMXFiles.SelectedNode.Expand();
-                //tvADMXFiles.SelectedNode.ImageUrl = "~/Images/folder.png";
-            }
-
+            catch { }
         }
 
         protected void tvADMXFiles_TreeNodeCollapsed(object sender, TreeNodeEventArgs e)
         {
-            tvADMXFiles.SelectedNode.ImageUrl = "~/Images/folder_closed.png";
+            try
+            {
+                tvADMXFiles.SelectedNode.ImageUrl = "~/Images/folder_closed.png";
+            }
+            catch { }
         }
     }
 }

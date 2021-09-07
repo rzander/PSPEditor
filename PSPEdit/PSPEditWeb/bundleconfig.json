@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "Content/bootstrap-reboot.min.css",
+    "inputFiles": [
+      "Content/bootstrap-reboot.css"
+    ]
+  }
+]
