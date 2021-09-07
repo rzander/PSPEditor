@@ -44,8 +44,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PSPEdit">
+      <HintPath>..\PSPEditLib\bin\Debug\PSPEdit.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
@@ -85,15 +88,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-3.5.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.5.1.js" />
-    <Content Include="Scripts\jquery-3.5.1.min.js" />
-    <Content Include="Scripts\jquery-3.5.1.slim.js" />
-    <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
-    <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.5.1.min.map" />
+    <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -103,6 +99,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Folder_16.png" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
     <Content Include="TreeLineImages\dash.gif" />
     <Content Include="TreeLineImages\dashminus.gif" />
     <Content Include="TreeLineImages\dashplus.gif" />
@@ -147,12 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PSPEditLib\PSPEditLib.csproj">
-      <Project>{dba98617-8399-45aa-854c-b05c2510b6d3}</Project>
-      <Name>PSPEditLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
