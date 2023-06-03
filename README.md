@@ -3,7 +3,7 @@ a Windows Policy Editor that returns PowerShell scripts...
 
 With PSPEditor you can configure your Policies like with GPEdit but as a result you get the PowerShell code.
 
-The current version is based on Win10 (21H1) ADMX Files (English).
+The current version is based on Win10 (21H2) ADMX Files (English).
 
 First trial at: http://pspeditor.azurewebsites.net/
 
@@ -26,3 +26,4 @@ There is no support and warranty... use at your own risk !!!!
 * 5.Aug.2019 : upload policy settings from Win10 1903
 * 11.Mar.2020 : upload policy settings for Edge Chromium
 * 7.Sep.2021 : upload policy settings from Win10 21H1
+* 8.Feb.2022 : upload policy settings from Win10 21H2 ; update Office settings
