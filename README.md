@@ -27,3 +27,4 @@ There is no support and warranty... use at your own risk !!!!
 * 11.Mar.2020 : upload policy settings for Edge Chromium
 * 7.Sep.2021 : upload policy settings from Win10 21H1
 * 8.Feb.2022 : upload policy settings from Win10 21H2 ; update Office settings
+* 3.Oct.2024 : upload policy settings from Win11 24H2 ; Office2016 settings removed
